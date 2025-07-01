@@ -13,15 +13,33 @@ A Node.js Express API that demonstrates Lightning Network functionality using LN
 - 🆕 Create new wallets
 - 🛡️ Rate limiting and security middleware
 
-
 ## Backend Infra using docker 
 Make sure you have docker running then download the lnbits image from docker 
 
-```
-docker run --detach --publish 5000:5000 --name lnbits --volume ${PWD}/.env:/app/.env lnbits/lnbits
-```
+## 🛠️ Admin Setup (Super User)
+To access **LNbits admin settings and enable extensions**, you need to launch the container with a `SUPER_USER` ID.
 
-Go to the `http://localhost:5000` -> In settings -> Funding -> Active Funding -> FakeWallet or another node...
+1. Get your LNbits User ID:
+   * Run the LNbits container once:
+   ```bash
+   docker run --detach --publish 5000:5000 --name lnbits lnbits/lnbits
+   ```
+   * Visit `http://localhost:5000` and create a wallet
+   * Copy your User ID from the URL (e.g., `http://localhost:5000/wallet?usr=abc123...`)
+   * Stop the container: `docker stop lnbits && docker rm lnbits`
+
+2. Restart with Super User privileges:
+   ```bash
+   docker run --detach --publish 5000:5000 --name lnbits \
+     --env SUPER_USER=your_user_id_here \
+     --volume ${PWD}/.env:/app/.env \
+     lnbits/lnbits
+   ```
+
+3. Access admin panel at `http://localhost:5000/admin` to enable extensions and configure advanced settings.
+
+4. Go to `http://localhost:5000` -> In settings -> Funding -> Active Funding -> FakeWallet or another node...
+
 ## Setup 🛠️
 
 1. Install dependencies:
