@@ -32,7 +32,7 @@ Go to the `http://localhost:5000` -> In settings -> Funding -> Active Funding ->
 2. Configure environment variables in `.env`:
    ```env
    MINT_LIGHTNING_BACKEND=CoreLightningWallet
-   LNBITS_URL=http://localhost:5000
+   LNBITS_NODE_URL=http://localhost:5000
    LNBITS_ADMIN_KEY=your_admin_key_here
    LNBITS_INVOICE_KEY=your_invoice_key_here
    PORT=3000
